@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do App</title>
+</head>
+<body>
+
+    <h1>To Do App</h1>
+    <input />
+    <button>Adicionar</button>
+
+    <div id="lista">
+        <ul>
+
+        </ul>
+
+    </div>
+
+    <script>
+    var lista = document.querySelector("ul");
+    var button = document.querySelector("button");
+    var input = document.querySelector("input");
+
+    var items = [
+        "criar um input",
+        "criar um botão",
+        "criar uma lista"
+            ]
+
+            function mostrarItems() {
+                lista.innerHTML = "";
+                for(item of items) {
+                    var itemLi = document.createElement("li");
+                    var itemTexto = document.createTextNode(item);
+                    itemLi.appendChild(itemTexto);
+                    lista.appendChild(itemLi);
+
+                    var removerElemento = document.createElement("a");
+                    removerElemento.setAttribute("href", "#");
+                    var removerTexto = document.createTextNode("remover");
+                    itemLi.appendChild(removerElemento);
+                    removerElemento.appendChild(removerTexto);
+
+                    var itemPosicao = items.indexOf(item);
+                    removerElemento.setAttribute("onclick", "removerItem(" + itemPosicao + ")");
+                }
+            }
+
+            mostrarItems();
+
+            function adicionarItem(){
+                var itemTexto = input.value;
+                items.push(itemTexto);
+                mostrarItems(); 
+                input.value = "";
+            }
+
+            
+
+            button.onclick = adicionarItem;
+
+            function removerItem(itemPosicao){
+                items.splice(itemPosicao, 1);
+                mostrarItems();
+
+            }
+    </script>
+</body>
+</html>
